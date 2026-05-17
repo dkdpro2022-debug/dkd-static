@@ -57,6 +57,20 @@ Then open:
 http://SERVER_IP:8084/
 ```
 
+To preview metadata and share-image URLs with a specific host, pass `SITE_URL`:
+
+```bash
+SITE_URL=http://SERVER_IP:8084 bash tools/build_static_site.sh
+```
+
+For GitHub Pages verification before DNS migration, use the GitHub Pages URL:
+
+```bash
+SITE_URL=https://USERNAME.github.io/REPO_NAME bash tools/build_static_site.sh
+```
+
+The build rewrites old `https://dieukydieu.tv/...` references in generated HTML to `SITE_URL`, so assets such as OpenGraph images and JSON-LD thumbnails do not depend on the old host during verification.
+
 ## GitHub Pages
 
 The GitHub Actions workflow builds `dist/` and deploys that folder to GitHub Pages.
@@ -64,3 +78,14 @@ The GitHub Actions workflow builds `dist/` and deploys that folder to GitHub Pag
 Recommended repository setting:
 
 - Source: GitHub Actions
+
+By default, GitHub Actions derives `SITE_URL` from the repository name:
+
+- `https://OWNER.github.io/REPO_NAME` for project pages
+- `https://OWNER.github.io` for an `OWNER.github.io` repository
+
+For the final custom domain, add a repository variable named `SITE_URL` with the final value, for example:
+
+```text
+https://dieukydieu.tv
+```
