@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ "${SKIP_GITLEAKS:-}" = "1" ] || [ "${SKIP:-}" = "gitleaks" ]; then
+  echo "Skipping Gitleaks pre-commit scan."
+  exit 0
+fi
+
+if ! command -v gitleaks >/dev/null 2>&1; then
+  cat >&2 <<'EOF'
+Gitleaks is required by this repo's pre-commit hook, but it is not installed.
+
+Install it, then retry the commit:
+  https://github.com/gitleaks/gitleaks#installing
+
+Temporary emergency bypass:
+  SKIP_GITLEAKS=1 git commit ...
+EOF
+  exit 1
+fi
+
+gitleaks git --pre-commit --redact --staged --verbose
