@@ -32,6 +32,74 @@ if [ -d "$ROOT_DIR/assets/wp-includes" ]; then
   cp -a "$ROOT_DIR/assets/wp-includes" "$DIST_DIR/wp-includes"
 fi
 
+python3 - "$DIST_DIR" <<'PY'
+import os
+import re
+import sys
+from pathlib import Path
+
+dist_dir = Path(sys.argv[1]).resolve()
+html_files = list(dist_dir.rglob("*.html"))
+id_to_dir = {}
+
+id_pattern = re.compile(r'<body[^>]*\b(?:postid|page-id|post)-(\d+)\b', re.I)
+old_link_pattern = re.compile(r'((?:\.\./)*)index\.html%3Fp=(\d+)\.html(#[^"\'<\s]*)?')
+
+for html_file in html_files:
+    text = html_file.read_text(encoding="utf-8", errors="ignore")
+    match = id_pattern.search(text)
+    if match:
+        id_to_dir[match.group(1)] = html_file.parent
+
+for html_file in html_files:
+    text = html_file.read_text(encoding="utf-8", errors="ignore")
+    current_dir = html_file.parent
+
+    def replace_old_link(match):
+        target_dir = id_to_dir.get(match.group(2))
+        if target_dir is None:
+            return match.group(0)
+
+        fragment = match.group(3) or ""
+        if target_dir == current_dir:
+            return fragment or "./"
+
+        relative = os.path.relpath(target_dir, current_dir).replace(os.sep, "/")
+        return f"{relative}/{fragment}"
+
+    updated = old_link_pattern.sub(replace_old_link, text)
+    if updated != text:
+        html_file.write_text(updated, encoding="utf-8")
+
+redirect_template = """<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0; url={target}">
+  <link rel="canonical" href="{target}">
+  <script>location.replace({target_json});</script>
+  <title>Redirecting...</title>
+</head>
+<body>
+  <a href="{target}">Redirecting...</a>
+</body>
+</html>
+"""
+
+for post_id, target_dir in id_to_dir.items():
+    target = os.path.relpath(target_dir, dist_dir).replace(os.sep, "/") + "/"
+    target_json = repr(target)
+    redirect_html = redirect_template.format(target=target, target_json=target_json)
+
+    for legacy_name in (
+        f"index.html?p={post_id}.html",
+        f"index.html%3Fp={post_id}.html",
+    ):
+        (dist_dir / legacy_name).write_text(redirect_html, encoding="utf-8")
+
+print(f"Rewrote legacy WordPress ID links and redirects for {len(id_to_dir)} pages")
+PY
+
 if [ -n "$SITE_URL" ]; then
   export SITE_URL
   find "$DIST_DIR" -type f \( -name "*.html" -o -name "*.txt" -o -name "*.xml" \) \
