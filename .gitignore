@@ -2,3 +2,4 @@
 .codex/
 use.fontawesome.com/
 .venv/
+dist/
