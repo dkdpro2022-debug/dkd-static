@@ -18,32 +18,47 @@ Open:
 http://SERVER_IP:8084/
 ```
 
-## GitHub Pages
+## Cloudflare Pages
 
-This repo deploys with GitHub Actions.
+This repo deploys to Cloudflare Pages through GitHub Actions using Direct Upload.
 
-In GitHub, use:
+Create a Cloudflare Pages project named:
 
 ```text
-Settings -> Pages -> Source: GitHub Actions
+dkd-static
 ```
 
-After the workflow runs, visit:
+Use Direct Upload, not the Cloudflare Git integration.
+
+Add these GitHub repository secrets:
 
 ```text
-https://OWNER.github.io/REPO_NAME/
+CLOUDFLARE_API_TOKEN
+CLOUDFLARE_ACCOUNT_ID
 ```
 
-For this repo, that should be:
+Add this GitHub repository variable:
 
 ```text
-https://dkdpro2022-debug.github.io/dkd-static/
+SITE_URL=https://dieukydieu.tv
 ```
 
-For the final domain, set a repository variable named `SITE_URL`, for example:
+The deployment workflow is:
 
 ```text
-https://dkd.tv
+.github/workflows/deploy-cloudflare-pages.yml
+```
+
+After the workflow runs, attach the custom domain in Cloudflare Pages:
+
+```text
+dieukydieu.tv
+```
+
+Then visit:
+
+```text
+https://dieukydieu.tv/
 ```
 
 For video URLs, the build uses this media host by default:

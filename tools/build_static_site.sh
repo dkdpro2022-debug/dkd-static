@@ -6,15 +6,8 @@ DIST_DIR="$ROOT_DIR/dist"
 SITE_URL="${SITE_URL:-}"
 MEDIA_URL="${MEDIA_URL:-https://media.dieukydieu.tv}"
 
-if [ -z "$SITE_URL" ] && [ "${GITHUB_ACTIONS:-}" = "true" ] && [ -n "${GITHUB_REPOSITORY:-}" ]; then
-  REPO_OWNER="${GITHUB_REPOSITORY_OWNER:-${GITHUB_REPOSITORY%/*}}"
-  REPO_NAME="${GITHUB_REPOSITORY#*/}"
-
-  if [ "$REPO_NAME" = "$REPO_OWNER.github.io" ]; then
-    SITE_URL="https://$REPO_OWNER.github.io"
-  else
-    SITE_URL="https://$REPO_OWNER.github.io/$REPO_NAME"
-  fi
+if [ -z "$SITE_URL" ] && [ -n "${CF_PAGES_URL:-}" ]; then
+  SITE_URL="$CF_PAGES_URL"
 fi
 
 SITE_URL="${SITE_URL%/}"
