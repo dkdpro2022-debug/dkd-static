@@ -4,6 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DIST_DIR="$ROOT_DIR/dist"
 SITE_URL="${SITE_URL:-}"
+MEDIA_URL="${MEDIA_URL:-https://media.dieukydieu.tv}"
 
 if [ -z "$SITE_URL" ] && [ "${GITHUB_ACTIONS:-}" = "true" ] && [ -n "${GITHUB_REPOSITORY:-}" ]; then
   REPO_OWNER="${GITHUB_REPOSITORY_OWNER:-${GITHUB_REPOSITORY%/*}}"
@@ -17,6 +18,8 @@ if [ -z "$SITE_URL" ] && [ "${GITHUB_ACTIONS:-}" = "true" ] && [ -n "${GITHUB_RE
 fi
 
 SITE_URL="${SITE_URL%/}"
+MEDIA_URL="${MEDIA_URL%/}"
+export MEDIA_URL
 
 rm -rf "$DIST_DIR"
 mkdir -p "$DIST_DIR"
@@ -37,13 +40,16 @@ import os
 import re
 import sys
 from pathlib import Path
+from urllib.parse import quote, unquote, urlparse
 
 dist_dir = Path(sys.argv[1]).resolve()
 html_files = list(dist_dir.rglob("*.html"))
 id_to_dir = {}
+media_url = os.environ.get("MEDIA_URL", "").rstrip("/")
 
 id_pattern = re.compile(r'<body[^>]*\b(?:postid|page-id|post)-(\d+)\b', re.I)
 old_link_pattern = re.compile(r'((?:\.\./)*)index\.html%3Fp=(\d+)\.html(#[^"\'<\s]*)?')
+old_video_pattern = re.compile(r'https?://dieukydieu\.tv/wp-content/uploads/[^"\'<>\s]+?\.mp4(?:\?[^"\'<>\s]*)?')
 
 for html_file in html_files:
     text = html_file.read_text(encoding="utf-8", errors="ignore")
@@ -70,6 +76,21 @@ for html_file in html_files:
     updated = old_link_pattern.sub(replace_old_link, text)
     if updated != text:
         html_file.write_text(updated, encoding="utf-8")
+
+if media_url:
+    for html_file in html_files:
+        text = html_file.read_text(encoding="utf-8", errors="ignore")
+
+        def replace_old_video(match):
+            raw_url = match.group(0)
+            parsed = urlparse(raw_url)
+            filename = Path(parsed.path).name
+            encoded_name = quote(unquote(filename))
+            return f"{media_url}/videos/original/{encoded_name}"
+
+        updated = old_video_pattern.sub(replace_old_video, text)
+        if updated != text:
+            html_file.write_text(updated, encoding="utf-8")
 
 redirect_template = """<!doctype html>
 <html lang="vi">
