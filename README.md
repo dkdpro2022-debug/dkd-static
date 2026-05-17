@@ -46,6 +46,12 @@ For the final domain, set a repository variable named `SITE_URL`, for example:
 https://dkd.tv
 ```
 
+For video URLs, the build uses this media host by default:
+
+```text
+https://media.dieukydieu.tv
+```
+
 ## Upload Videos to Cloudflare R2
 
 Set R2 credentials as environment variables:
