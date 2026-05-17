@@ -2,6 +2,9 @@ name: Deploy GitHub Pages
 
 on:
   push:
+    branches:
+      - master
+      - main
     tags:
       - "v*.*.*"
   workflow_dispatch:
