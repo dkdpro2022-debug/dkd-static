@@ -6,11 +6,22 @@ if [ "${SKIP_GITLEAKS:-}" = "1" ] || [ "${SKIP:-}" = "gitleaks" ]; then
   exit 0
 fi
 
+if command -v gitleaks >/dev/null 2>&1; then
+  exec gitleaks git --pre-commit --redact --staged --verbose
+fi
+
+if command -v docker >/dev/null 2>&1; then
+  exec docker run --rm \
+    -v "$PWD:/repo" \
+    ghcr.io/gitleaks/gitleaks:v8.30.0 \
+    git --pre-commit --redact --staged --verbose /repo
+fi
+
 if ! command -v gitleaks >/dev/null 2>&1; then
   cat >&2 <<'EOF'
-Gitleaks is required by this repo's pre-commit hook, but it is not installed.
+Gitleaks is required by this repo's pre-commit hook, but neither gitleaks nor docker is installed.
 
-Install it, then retry the commit:
+Install Gitleaks, then retry the commit:
   https://github.com/gitleaks/gitleaks#installing
 
 Temporary emergency bypass:
@@ -18,5 +29,3 @@ Temporary emergency bypass:
 EOF
   exit 1
 fi
-
-gitleaks git --pre-commit --redact --staged --verbose
