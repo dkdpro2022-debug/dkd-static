@@ -55,6 +55,7 @@ export R2_ACCOUNT_ID="your_cloudflare_account_id"
 export R2_BUCKET="your_bucket_name"
 export AWS_ACCESS_KEY_ID="your_r2_access_key_id"
 export AWS_SECRET_ACCESS_KEY="your_r2_secret_access_key"
+export R2_PUBLIC_BASE_URL="https://media.example.com"
 ```
 
 Preview the upload:
@@ -68,6 +69,8 @@ Upload videos:
 ```bash
 bash tools/upload_videos_to_r2.sh
 ```
+
+The script skips files that already exist in the bucket and prints the public URLs when `R2_PUBLIC_BASE_URL` is set.
 
 List uploaded videos:
 
