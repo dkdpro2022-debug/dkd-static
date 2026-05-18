@@ -202,7 +202,6 @@ dist_dir = Path(sys.argv[1]).resolve()
 home_hero = """<section class="dkd-modern-hero" aria-labelledby="dkd-modern-hero-title">
   <div class="dkd-modern-hero__inner">
     <div>
-      <span class="dkd-modern-kicker">Dieu Ky Dieu TV</span>
       <h1 id="dkd-modern-hero-title">Những câu chuyện làm sáng lại niềm tin vào điều thiện.</h1>
       <p>Điều Kỳ Diệu lưu giữ các câu chuyện, video và góc nhìn chân thực về Pháp Luân Công, đời sống tinh thần, và những giá trị Chân - Thiện - Nhẫn trong cuộc sống hôm nay.</p>
       <div class="dkd-modern-actions" aria-label="Lối đi nhanh">
