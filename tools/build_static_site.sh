@@ -192,4 +192,74 @@ if [ -n "$SITE_URL" ]; then
   echo "Rewrote site URLs to $SITE_URL"
 fi
 
+python3 - "$DIST_DIR" <<'PY'
+import os
+import re
+import sys
+from pathlib import Path
+
+dist_dir = Path(sys.argv[1]).resolve()
+home_hero = """<section class="dkd-modern-hero" aria-labelledby="dkd-modern-hero-title">
+  <div class="dkd-modern-hero__inner">
+    <div>
+      <span class="dkd-modern-kicker">Dieu Ky Dieu TV</span>
+      <h1 id="dkd-modern-hero-title">Những câu chuyện làm sáng lại niềm tin vào điều thiện.</h1>
+      <p>Điều Kỳ Diệu lưu giữ các câu chuyện, video và góc nhìn chân thực về Pháp Luân Công, đời sống tinh thần, và những giá trị Chân - Thiện - Nhẫn trong cuộc sống hôm nay.</p>
+      <div class="dkd-modern-actions" aria-label="Lối đi nhanh">
+        <a class="dkd-modern-button dkd-modern-button--primary" href="gioi-thieu-phap-luan-cong/">Tìm hiểu Pháp Luân Công</a>
+        <a class="dkd-modern-button dkd-modern-button--secondary" href="category/videos/page/1/">Xem video tiêu biểu</a>
+      </div>
+    </div>
+    <aside class="dkd-modern-brief" aria-label="Chủ đề nổi bật">
+      <h2>Chủ đề nổi bật</h2>
+      <ul>
+        <li>Những câu chuyện thần kỳ và hành trình thay đổi cuộc đời.</li>
+        <li>Vẻ đẹp Chân - Thiện - Nhẫn trong cộng đồng Việt Nam và thế giới.</li>
+        <li>Video, âm nhạc, nghệ thuật và tư liệu được chọn lọc.</li>
+      </ul>
+    </aside>
+  </div>
+</section>"""
+
+for html_file in dist_dir.rglob("*.html"):
+    text = html_file.read_text(encoding="utf-8", errors="ignore")
+    rel_root = os.path.relpath(dist_dir, html_file.parent).replace(os.sep, "/")
+    if rel_root == ".":
+        rel_root = ""
+    else:
+        rel_root += "/"
+
+    if "dkd-redesign.css" not in text:
+        text = text.replace(
+            "</head>",
+            f'<link rel="stylesheet" href="{rel_root}dkd-redesign.css" />\n</head>',
+            1,
+        )
+
+    text = re.sub(
+        r'<body([^>]*)class="([^"]*)"',
+        lambda match: (
+            match.group(0)
+            if "dkd-redesign" in match.group(2).split()
+            else f'<body{match.group(1)}class="{match.group(2)} dkd-redesign"'
+        ),
+        text,
+        count=1,
+    )
+
+    if html_file == dist_dir / "index.html" and "dkd-modern-hero" not in text:
+        text = text.replace('<main id="main" class="">', '<main id="main" class="">' + home_hero, 1)
+
+    if "dkd-redesign.js" not in text:
+        text = text.replace(
+            "</body>",
+            f'<script src="{rel_root}dkd-redesign.js" defer></script>\n</body>',
+            1,
+        )
+
+    html_file.write_text(text, encoding="utf-8")
+
+print("Injected Dieu Ky Dieu redesign assets")
+PY
+
 echo "Built static site in $DIST_DIR"
