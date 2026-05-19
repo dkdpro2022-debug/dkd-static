@@ -273,18 +273,28 @@ body.dkd-redesign {
 }
 
 .dkd-redesign .box-blog-post {
-  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+  transition: box-shadow 160ms ease, background-color 160ms ease;
 }
 
 .dkd-redesign .box-blog-post:hover {
-  border-color: rgba(26, 90, 150, 0.32);
-  box-shadow: var(--dkd-shadow) !important;
-  transform: translateY(-2px);
+  border-color: var(--dkd-line);
+  box-shadow: 0 10px 24px rgba(27, 27, 27, 0.09) !important;
+  transform: none;
 }
 
 .dkd-redesign .box-image img,
 .dkd-redesign .image-cover img {
   filter: saturate(0.95) contrast(1.02);
+  transition: filter 160ms ease;
+}
+
+.dkd-redesign .box-blog-post:hover .box-image img,
+.dkd-redesign .box-blog-post:hover .image-cover img {
+  filter: saturate(1) contrast(1.04);
+}
+
+.dkd-redesign .box-blog-post:hover .post-title {
+  color: var(--dkd-blue-dark) !important;
 }
 
 .dkd-redesign .box-text {
