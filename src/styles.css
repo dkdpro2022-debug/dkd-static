@@ -1,0 +1,59 @@
+@font-face {
+  font-family: PoppinsVN;
+  src: url("/wp-content/uploads/2020/03/PoppinsVN-400.otf") format("opentype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: PoppinsVN;
+  src: url("/wp-content/uploads/2020/03/PoppinsVN-600.otf") format("opentype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: PoppinsVN;
+  src: url("/wp-content/uploads/2020/03/PoppinsVN-800.otf") format("opentype");
+  font-weight: 900;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 39 45% 95%;
+    --foreground: 222 35% 13%;
+    --card: 40 60% 99%;
+    --card-foreground: 222 35% 13%;
+    --primary: 209 78% 20%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 39 46% 92%;
+    --secondary-foreground: 222 35% 13%;
+    --muted: 39 30% 91%;
+    --muted-foreground: 218 12% 42%;
+    --accent: 39 54% 90%;
+    --accent-foreground: 222 35% 13%;
+    --border: 222 20% 88%;
+    --input: 222 20% 88%;
+    --ring: 38 52% 48%;
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "liga" 1, "kern" 1;
+  }
+}
+
+.hero-shell {
+  background: #f7f1e8;
+}

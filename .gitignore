@@ -2,5 +2,6 @@
 .codex/
 use.fontawesome.com/
 .venv/
+node_modules/
 dist/
 downloads/
