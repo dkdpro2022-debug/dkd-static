@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@fontsource/be-vietnam-pro": "5.2.8",
+    "@fontsource/noto-serif": "5.2.9",
     "@radix-ui/react-slot": "^1.2.4",
     "@tailwindcss/vite": "^4.1.14",
     "@vitejs/plugin-react": "^5.0.4",

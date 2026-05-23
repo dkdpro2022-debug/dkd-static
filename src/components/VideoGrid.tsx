@@ -34,7 +34,7 @@ export default function VideoGrid() {
             <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400">
               TUYỂN CHỌN TƯ LIỆU
             </span>
-            <h2 className="mt-4 font-display text-3xl sm:text-4xl font-medium tracking-normal text-slate-950">
+            <h2 className="mt-4 font-editorial text-3xl sm:text-4xl font-normal tracking-normal text-slate-950">
               Câu chuyện nổi bật
             </h2>
           </motion.div>

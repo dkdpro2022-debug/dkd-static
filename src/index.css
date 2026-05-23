@@ -36,3 +36,9 @@
     -moz-osx-font-smoothing: grayscale;
   }
 }
+
+@layer utilities {
+  .font-editorial {
+    font-family: "Noto Serif", ui-serif, Georgia, Cambria, "Times New Roman", serif;
+  }
+}

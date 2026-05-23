@@ -33,7 +33,7 @@ export default function StoryEditorial() {
             <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400">
               NHỮNG CÂU CHUYỆN THẦN KỲ
             </span>
-            <h2 className="font-display text-3xl sm:text-5xl font-medium tracking-normal leading-[1.15] text-slate-950">
+            <h2 className="font-editorial text-3xl sm:text-5xl font-normal tracking-normal leading-[1.2] text-slate-950">
               Thư viện truyền cảm hứng, <br />
               khơi mở nhân tâm.
             </h2>

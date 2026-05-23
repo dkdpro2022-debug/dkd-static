@@ -41,7 +41,7 @@ export default function Quotes() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.1 }}
-            className="font-display text-3xl sm:text-4xl font-medium tracking-normal text-slate-950"
+            className="font-editorial text-3xl sm:text-4xl font-normal tracking-normal text-slate-950"
           >
             Tiếng nói chân thực về Pháp Luân Công
           </motion.h2>
@@ -73,7 +73,7 @@ export default function Quotes() {
               <Card className="h-full border-slate-200 bg-white shadow-none relative overflow-hidden group hover:border-slate-400 transition-all duration-300 rounded-none flex flex-col justify-between">
                 <CardContent className="p-8 sm:p-10 flex flex-col justify-between h-full">
                   {/* Quote Body text */}
-                  <blockquote className="text-base sm:text-lg font-light leading-relaxed text-slate-800 italic relative mb-10">
+                  <blockquote className="text-[15px] sm:text-base font-normal leading-8 text-slate-700 relative mb-10">
                     “{quote.text}”
                   </blockquote>
                   

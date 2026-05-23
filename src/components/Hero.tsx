@@ -42,7 +42,7 @@ export default function Hero() {
 
       <div className="relative mx-auto max-w-7xl w-full px-5 py-16 lg:px-8">
         <motion.div 
-          className="max-w-3xl flex flex-col justify-center"
+          className="max-w-4xl flex flex-col justify-center"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -58,7 +58,7 @@ export default function Hero() {
 
           <motion.h1 
             variants={itemVariants}
-            className="font-display text-[clamp(2.45rem,5.35vw,4.85rem)] font-normal leading-[1.14] text-slate-950 mb-6 tracking-normal"
+            className="font-editorial text-[clamp(2.35rem,4.65vw,4.35rem)] font-normal leading-[1.22] text-slate-950 mb-6 tracking-normal"
           >
             Những câu chuyện <br />
             sáng lại niềm tin <br />

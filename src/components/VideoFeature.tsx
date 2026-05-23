@@ -16,7 +16,7 @@ export default function VideoFeature() {
             <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400">
               VIDEO TIÊU BIỂU
             </span>
-            <h2 className="mt-4 font-display text-3xl sm:text-5xl font-medium tracking-normal text-slate-950 leading-[1.15] max-w-xl">
+            <h2 className="mt-4 font-editorial text-3xl sm:text-5xl font-normal tracking-normal text-slate-950 leading-[1.2] max-w-xl">
               Nội dung kể bằng hình ảnh, nhịp thở và sự tĩnh tại.
             </h2>
           </motion.div>

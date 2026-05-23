@@ -4,6 +4,9 @@ import "@fontsource/be-vietnam-pro/vietnamese-400.css";
 import "@fontsource/be-vietnam-pro/vietnamese-500.css";
 import "@fontsource/be-vietnam-pro/vietnamese-600.css";
 import "@fontsource/be-vietnam-pro/vietnamese-700.css";
+import "@fontsource/noto-serif/vietnamese-400.css";
+import "@fontsource/noto-serif/vietnamese-500.css";
+import "@fontsource/noto-serif/vietnamese-600.css";
 import App from './App.tsx';
 import './index.css';
 
