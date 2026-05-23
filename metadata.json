@@ -1,0 +1,6 @@
+{
+  "name": "Điều Kỳ Diệu",
+  "description": "Trang thông tin tổng hợp về những câu chuyện chân thực, trải nghiệm kỳ diệu có thật của Pháp Luân Đại Pháp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
