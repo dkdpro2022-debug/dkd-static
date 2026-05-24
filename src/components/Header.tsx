@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ChevronDown, Menu, Search, Sparkles, X } from "lucide-react";
 import { Button } from "./ui/button";
-import { allNavItems, navItems } from "../data";
+import { allNavItems } from "../data";
 import { motion, AnimatePresence } from "motion/react";
 
 export default function Header() {
@@ -45,15 +45,6 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-8 lg:flex">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-slate-950 relative cursor-pointer py-1 transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-slate-950 after:transition-all after:duration-300 hover:after:w-full"
-              >
-                {item.label}
-              </button>
-            ))}
             <div className="relative">
               <button
                 onClick={() => setIsSectionMenuOpen((open) => !open)}
