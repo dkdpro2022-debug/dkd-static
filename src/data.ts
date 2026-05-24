@@ -131,6 +131,16 @@ export const contentDetails: Record<string, ContentDetail> = {
       "Sau khi xem, bạn có thể tiếp tục khám phá các video cùng chuyên mục hoặc đọc thêm các bài viết liên quan để có thêm bối cảnh.",
     ],
   },
+  "/videos/nghe-si-mua-le-vi-toi-may-man-khi-tim-thay-anh-sang-chan-ly-cua-cuoc-doi/index.html": {
+    description:
+      "Nghệ sĩ múa Lê Vi kể về hành trình rời ánh đèn sân khấu, sống tại Pháp và tìm thấy điều cô gọi là ánh sáng chân lý của cuộc đời.",
+    videoUrl: "https://media.dieukydieu.tv/videos/original/le-vy.mp4",
+    body: [
+      "Video ghi lại chia sẻ của nghệ sĩ múa Lê Vi về những thay đổi trong cuộc sống và nội tâm sau khi biết đến Pháp Luân Công.",
+      "Câu chuyện được kể từ trải nghiệm cá nhân, phù hợp với người muốn tìm hiểu vì sao một nghệ sĩ lại chọn một hướng đi mới trong đời sống tinh thần.",
+      "Bạn có thể xem thêm các video cùng chuyên mục để so sánh nhiều góc nhìn khác nhau, hoặc đọc thêm blog để có thêm bối cảnh về Pháp Luân Công.",
+    ],
+  },
 };
 
 export const defaultContentDetail = (title: string, sectionTitle: string): ContentDetail => ({
