@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowUpRight, CirclePlay } from "lucide-react";
+import { CirclePlay } from "lucide-react";
 import { Button } from "./ui/button";
 import { heroText, homepageSections } from "../data";
 import { motion } from "motion/react";
@@ -66,24 +66,13 @@ export default function Hero() {
             className="flex flex-col gap-3 sm:flex-row"
           >
             <Button 
-              asChild 
+              asChild
               size="lg" 
               className="h-12 rounded-none bg-slate-950 px-8 text-xs font-bold tracking-widest uppercase text-white hover:bg-slate-800 transition-colors duration-200 cursor-pointer shadow-none border-none"
             >
               <a href={`#${homepageSections[0]?.id ?? "sections"}`} onClick={(e) => handleScrollTo(homepageSections[0]?.id ?? "sections", e)}>
                 <CirclePlay className="h-4 w-4 mr-2" />
                 XEM VIDEO TIÊU BIỂU
-              </a>
-            </Button>
-            <Button 
-              asChild 
-              variant="outline" 
-              size="lg" 
-              className="h-12 rounded-none border-slate-250 bg-white px-8 text-xs font-bold tracking-widest uppercase text-slate-900 hover:bg-slate-50 transition-colors duration-200 cursor-pointer shadow-none"
-            >
-              <a href="#sections" onClick={(e) => handleScrollTo("sections", e)}>
-                XEM TOÀN BỘ CHUYÊN MỤC
-                <ArrowUpRight className="h-4 w-4 ml-1" />
               </a>
             </Button>
           </motion.div>

@@ -18,10 +18,10 @@ const layoutByIndex: Record<number, HomepageSectionLayout> = {
 };
 
 const priorityLabels: Record<string, string> = {
-  "video-tieu-bieu": "Video",
+  "video-tieu-bieu": "Video tiêu biểu",
+  "nguoi-noi-tieng-noi-gi-ve-phap-luan-cong": "Người nổi tiếng",
   "nhung-cau-chuyen-than-ky": "Câu chuyện",
-  "vung-dat-va-con-nguoi": "Vùng đất",
-  "huong-dan-cho-nguoi-moi-hoc": "Hướng dẫn",
+  "nha-khoa-hoc-va-gioi-tri-thuc-noi-ve-phap-luan-cong": "Chuyên gia",
 };
 
 const knownImages: Record<string, string> = {
@@ -261,17 +261,19 @@ export const contentDetails: Record<string, ContentDetail> = {
     ],
   },
   "/hoc-vien-phap-luan-cong-tai-sai-gon/": {
-    description: "Học viên Pháp Luân Công tại Sài Gòn là nội dung được lấy từ nguồn dieukydieu.tv và trình bày lại trong giao diện đọc rõ ràng hơn.",
+    description: "Học viên Pháp Luân Công tại Sài Gòn là video được nhúng từ nguồn dieukydieu.tv để người xem có thể theo dõi đầy đủ nội dung.",
+    videoEmbedUrl: "https://www.ganjing.com/embed/1fgej0g9n1g2bqVocaOCCmm7O1qj1c",
     body: [
-      "Nội dung nguồn không có tệp video trực tiếp để nhúng, nên trang này hiển thị dạng bài đọc với phần tóm lược chính.",
-      "Người xem vẫn có thể mở bài gốc từ liên kết trong trang để đối chiếu toàn bộ nội dung nguồn.",
+      "Video này được nhúng từ nguồn phát gốc để người xem có thể theo dõi ngay trên trang chi tiết.",
+      "Phần mô tả giữ lại bối cảnh chính của nội dung nguồn, đồng thời các liên kết bên cạnh giúp tiếp tục khám phá cùng chuyên mục.",
     ],
   },
   "/hich-troi-diet-trung-cong/": {
-    description: "10 Tội ác của ĐCS Trung Quốc là nội dung được lấy từ nguồn dieukydieu.tv và trình bày lại trong giao diện đọc rõ ràng hơn.",
+    description: "10 Tội ác của ĐCS Trung Quốc là video được nhúng từ nguồn dieukydieu.tv để người xem có thể theo dõi đầy đủ nội dung.",
+    videoEmbedUrl: "https://www.youtube.com/embed/qBbxLYEFw9w?rel=0",
     body: [
-      "Nội dung nguồn không có tệp video trực tiếp để nhúng, nên trang này hiển thị dạng bài đọc với phần tóm lược chính.",
-      "Người xem vẫn có thể mở bài gốc từ liên kết trong trang để đối chiếu toàn bộ nội dung nguồn.",
+      "Video này được nhúng từ nguồn phát gốc để người xem có thể theo dõi ngay trên trang chi tiết.",
+      "Phần mô tả giữ lại bối cảnh chính của nội dung nguồn, đồng thời các liên kết bên cạnh giúp tiếp tục khám phá cùng chuyên mục.",
     ],
   },
   "/phap-luan-cong-nhung-buc-anh-lich-su/": {
@@ -707,24 +709,27 @@ export const contentDetails: Record<string, ContentDetail> = {
     ],
   },
   "/cuoc-diet-chung-dam-mau/": {
-    description: "Cuộc diệt chủng đẫm máu là nội dung được lấy từ nguồn dieukydieu.tv và trình bày lại trong giao diện đọc rõ ràng hơn.",
+    description: "Cuộc diệt chủng đẫm máu là video được nhúng từ nguồn dieukydieu.tv để người xem có thể theo dõi đầy đủ nội dung.",
+    videoEmbedUrl: "https://www.youtube.com/embed/px4FndCGtrg?rel=0",
     body: [
-      "Nội dung nguồn không có tệp video trực tiếp để nhúng, nên trang này hiển thị dạng bài đọc với phần tóm lược chính.",
-      "Người xem vẫn có thể mở bài gốc từ liên kết trong trang để đối chiếu toàn bộ nội dung nguồn.",
+      "Video này được nhúng từ nguồn phát gốc để người xem có thể theo dõi ngay trên trang chi tiết.",
+      "Phần mô tả giữ lại bối cảnh chính của nội dung nguồn, đồng thời các liên kết bên cạnh giúp tiếp tục khám phá cùng chuyên mục.",
     ],
   },
   "/su-that-bi-dcstq-che-day-va-loi-giai-dap-sang-to-khap-the-gioi/": {
     description: "Tương tự như ‘Quái vật thành Rome’ đàn áp Cơ Đốc nhân khi xưa, Đảng Cộng sản Trung Quốc với chỉ lệnh của cựu lãnh đạo Giang Trạch Dân đã bức hại thảm khốc Pháp Luân Công, môn khí công ôn hòa thuộc trường phái Phật gia. Chiến dịch xóa sổ Pháp Luân Công đang đi đến thất bại hoàn toàn khi thế giới ngày càng biết đến sự thật đằng sau những lời tuyên truyền vu khống của ĐCSTQ. Đế chế La Mã đã lụi bại sau khi đàn áp Cơ Đốc giáo, Chủ tịch Trung Quốc Tập Cận Bình sẽ lựa chọn điều gì: Tiếp tục di họa của Giang Trạch Dân hay hòa mình cùng thế giới tự do?",
+    videoEmbedUrl: "https://www.youtube.com/embed/8XKU5NEumbs?rel=0",
     body: [
-      "Nội dung nguồn không có tệp video trực tiếp để nhúng, nên trang này hiển thị dạng bài đọc với phần tóm lược chính.",
-      "Người xem vẫn có thể mở bài gốc từ liên kết trong trang để đối chiếu toàn bộ nội dung nguồn.",
+      "Video này được nhúng từ nguồn phát gốc để người xem có thể theo dõi ngay trên trang chi tiết.",
+      "Phần mô tả giữ lại bối cảnh chính của nội dung nguồn, đồng thời các liên kết bên cạnh giúp tiếp tục khám phá cùng chuyên mục.",
     ],
   },
   "/vo-kich-lon-cua-trung-quoc-khien-bao-nguoi-chiu-hoa/": {
     description: "Sống trong tuyên truyền của Đức Quốc Xã, nhiều người đã không nhận ra cuộc tàn sát người Do Thái là một tội ác. Lịch sử đang tái diễn mà nhiều người không biết đến. Bi kịch bắt đầu khi Trung Quốc không thừa nhận môn khí công đem lại sức khỏe và tinh thần cho hàng triệu người trên thế giới: Pháp Luân Công, hay Pháp Luân Đại Pháp, môn khí công tu luyện theo nguyên lý Chân-Thiện-Nhẫn. “Pháp Luân Đại Pháp là một môn tập đem lại sức khỏe tốt hơn và nội tâm an hòa cho hàng triệu người trên khắp thế giới”, Nghị quyết 1432 của Thượng viện New York khẳng định nhân ngày Pháp Luân Đại Pháp Thế giới 2017.",
+    videoEmbedUrl: "https://www.youtube.com/embed/pErnNqQwYLc?rel=0",
     body: [
-      "Nội dung nguồn không có tệp video trực tiếp để nhúng, nên trang này hiển thị dạng bài đọc với phần tóm lược chính.",
-      "Người xem vẫn có thể mở bài gốc từ liên kết trong trang để đối chiếu toàn bộ nội dung nguồn.",
+      "Video này được nhúng từ nguồn phát gốc để người xem có thể theo dõi ngay trên trang chi tiết.",
+      "Phần mô tả giữ lại bối cảnh chính của nội dung nguồn, đồng thời các liên kết bên cạnh giúp tiếp tục khám phá cùng chuyên mục.",
     ],
   },
   "/bay-nua-vong-trai-dat-chi-de-gap-su-phu/": {

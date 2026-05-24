@@ -158,7 +158,7 @@ export default function HomepageSections() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.35 }}
-              className="mb-8 sm:mb-10"
+              className="mb-6 sm:mb-8"
             >
               <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-slate-400">
@@ -169,7 +169,7 @@ export default function HomepageSections() {
                   {section.items.length} mục
                 </span>
               </div>
-              <h2 className="max-w-4xl font-display text-3xl font-black leading-tight tracking-normal text-[#102A43] sm:text-4xl lg:text-5xl">
+              <h2 className="max-w-3xl font-display text-2xl font-black leading-tight tracking-normal text-[#102A43] sm:text-3xl lg:text-4xl">
                 {section.title}
               </h2>
             </motion.div>
