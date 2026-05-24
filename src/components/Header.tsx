@@ -15,6 +15,10 @@ export default function Header() {
   const scrollToSection = (id: string) => {
     setIsMobileMenuOpen(false);
     setIsSectionMenuOpen(false);
+    if (window.location.pathname !== "/") {
+      window.location.href = `/#${id}`;
+      return;
+    }
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
@@ -25,7 +29,7 @@ export default function Header() {
     <>
       <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-100 bg-white/90 backdrop-blur-md transition-all duration-300">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
-          <a className="flex items-center gap-3 group" href="#top" aria-label="Điều Kỳ Diệu" onClick={() => scrollToSection("top")}>
+          <a className="flex items-center gap-3 group" href="/" aria-label="Điều Kỳ Diệu">
             <div className="relative overflow-hidden rounded-full p-0.5 transition duration-300 group-hover:scale-105">
               <img className="h-11 w-11 object-contain" src="/wp-content/uploads/2020/02/logo-140-e1581310697140.png" alt="Điều Kỳ Diệu" />
             </div>
