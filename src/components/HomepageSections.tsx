@@ -10,6 +10,10 @@ type SectionCardProps = {
 };
 
 const SectionCard: React.FC<SectionCardProps> = ({ item, index }) => {
+  const rowLayout = item.image
+    ? "grid-cols-[6rem_minmax(0,1fr)_auto] sm:grid-cols-[2.75rem_auto_minmax(0,1fr)_auto]"
+    : "grid-cols-[2.35rem_minmax(0,1fr)_auto] sm:grid-cols-[2.75rem_auto_minmax(0,1fr)_auto]";
+
   return (
     <motion.a
       href={item.href}
@@ -17,14 +21,14 @@ const SectionCard: React.FC<SectionCardProps> = ({ item, index }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.28, delay: Math.min(index * 0.018, 0.12) }}
-      className="group grid grid-cols-[2.35rem_minmax(0,1fr)_auto] items-start gap-3 border-b border-slate-200 bg-white py-4 transition-colors hover:border-slate-400 sm:grid-cols-[2.75rem_auto_minmax(0,1fr)_auto] sm:gap-4"
+      className={`group grid ${rowLayout} items-start gap-3 border-b border-slate-200 bg-white py-4 transition-colors hover:border-slate-400 sm:gap-4`}
     >
-      <span className="pt-0.5 font-display text-xs font-bold text-slate-400">
+      <span className={`pt-0.5 font-display text-xs font-bold text-slate-400 ${item.image ? "hidden sm:block" : ""}`}>
         {String(index + 1).padStart(2, "0")}
       </span>
 
       {item.image ? (
-        <div className="hidden h-14 w-20 shrink-0 overflow-hidden bg-slate-100 sm:block">
+        <div className="h-16 w-24 shrink-0 overflow-hidden bg-slate-100 sm:h-14 sm:w-20">
           <img
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.035]"
             src={item.image}
