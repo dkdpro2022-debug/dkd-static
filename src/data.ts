@@ -72,10 +72,10 @@ const slugify = (value: string) =>
 
 const getPathKey = (href: string) => {
   try {
-    const url = new URL(href);
+    const url = new URL(href, "https://dieukydieu.tv");
     return decodeURIComponent(url.pathname).replace(/^\/|\/$/g, "");
   } catch {
-    return href;
+    return href.replace(/^\/|\/$/g, "");
   }
 };
 
@@ -108,6 +108,17 @@ export const contentDetails: Record<string, ContentDetail> = {
       "Video đặt người xem vào một không gian chậm rãi, nơi hình ảnh vùng đất cố đô và hoạt động tu luyện được trình bày như một lát cắt văn hóa.",
       "Nội dung phù hợp với người muốn tìm hiểu Pháp Luân Công qua câu chuyện thực tế tại Việt Nam, thay vì chỉ đọc khái niệm hoặc thông tin giới thiệu.",
       "Sau khi xem video, bạn có thể tiếp tục đọc các bài viết liên quan ở cuối trang để có thêm bối cảnh về các địa phương khác và các trải nghiệm cá nhân.",
+    ],
+  },
+  "/phap-luan-cong-tai-quang-ngai-nhung-doa-sen-tren-dong-song-tra/": {
+    description:
+      "Một video ghi lại hình ảnh học viên Pháp Luân Công tại Quảng Ngãi, với nhịp kể nhẹ nhàng về đời sống tu luyện, cảnh sắc địa phương và những giá trị thiện lành trong cộng đồng.",
+    videoUrl:
+      "https://media.dieukydieu.tv/videos/original/Ph%C3%A1p-Lu%C3%A2n-C%C3%B4ng-t%E1%BA%A1i-Qu%E1%BA%A3ng-Ng%C3%A3i-Nh%E1%BB%AFng-%C4%91%C3%B3a-sen-tr%C3%AAn-d%C3%B2ng-s%C3%B4ng-Tr%C3%A0..mp4",
+    body: [
+      "Video đưa người xem đến Quảng Ngãi qua hình ảnh sinh hoạt của các học viên Pháp Luân Công bên dòng sông Trà.",
+      "Nội dung phù hợp với người muốn tìm hiểu cách Pháp Luân Công được thực hành trong đời sống địa phương, qua hình ảnh chân thực và dễ tiếp cận.",
+      "Bạn có thể xem thêm các video cùng chuyên mục để đối chiếu trải nghiệm tại nhiều vùng đất khác nhau, hoặc đọc thêm blog để có thêm bối cảnh nền.",
     ],
   },
 };
