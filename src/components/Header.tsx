@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ChevronDown, Menu, Search, Sparkles, X } from "lucide-react";
+import { ChevronDown, Menu, Search, X } from "lucide-react";
 import { Button } from "./ui/button";
 import { allNavItems, navItems } from "../data";
 import { motion, AnimatePresence } from "motion/react";
@@ -9,7 +9,7 @@ export default function Header() {
   const [isSectionMenuOpen, setIsSectionMenuOpen] = useState(false);
   const navItemIds = new Set(navItems.map((item) => item.id));
   const dropdownItems = allNavItems
-    .map((item, index) => ({ ...item, index }))
+    .map((item) => ({ ...item }))
     .filter((item) => !navItemIds.has(item.id));
 
   const toggleMobileMenu = () => {
@@ -81,9 +81,8 @@ export default function Header() {
                         <button
                           key={item.id}
                           onClick={() => scrollToSection(item.id)}
-                          className="grid grid-cols-[2rem_1fr] items-center gap-2 px-3 py-2 text-left text-xs font-semibold text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-950"
+                          className="px-3 py-2 text-left text-xs font-semibold text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-950"
                         >
-                          <span className="font-display text-[10px] font-bold text-slate-400">{String(item.index + 1).padStart(2, "0")}</span>
                           <span>{item.label}</span>
                         </button>
                       ))}
@@ -140,18 +139,13 @@ export default function Header() {
               className="fixed bottom-0 right-0 top-0 z-40 w-full max-w-[320px] bg-white p-6 border-l border-slate-100 shadow-2xl lg:hidden flex flex-col justify-between"
             >
               <div className="pt-20">
-                <div className="flex items-center gap-2 mb-8 px-3 py-1.5 rounded-none bg-slate-50 border border-slate-100">
-                  <Sparkles className="h-3.5 w-3.5 text-slate-800" />
-                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-800">MENU</span>
-                </div>
                 <nav className="flex flex-col gap-4">
-                  {allNavItems.map((item, index) => (
+                  {allNavItems.map((item) => (
                     <button
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
-                      className="grid grid-cols-[2rem_1fr] items-center gap-2 text-left text-sm font-semibold text-slate-600 hover:text-slate-950 py-2.5 px-2 rounded-none hover:bg-slate-50 transition-all duration-200 cursor-pointer"
+                      className="text-left text-sm font-semibold text-slate-600 hover:text-slate-950 py-2.5 px-2 rounded-none hover:bg-slate-50 transition-all duration-200 cursor-pointer"
                     >
-                      <span className="font-display text-[10px] font-bold text-slate-400">{String(index + 1).padStart(2, "0")}</span>
                       <span>{item.label}</span>
                     </button>
                   ))}
