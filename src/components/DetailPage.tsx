@@ -30,6 +30,7 @@ function SmallContentLink({ item }: { item: HomepageItem }) {
 export default function DetailPage({ item, section, detail, relatedItems, blogItems }: DetailPageProps) {
   const isBlog = section.id === "blog";
   const sourceHref = new URL(item.href, "https://dieukydieu.tv").href;
+  const hasVideo = Boolean(detail.videoUrl || detail.videoEmbedUrl);
 
   return (
     <main className="bg-white pt-20">
@@ -55,7 +56,17 @@ export default function DetailPage({ item, section, detail, relatedItems, blogIt
 
       <section className="mx-auto grid max-w-7xl gap-10 px-5 py-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:px-8 lg:py-14">
         <div>
-          {detail.videoUrl ? (
+          {detail.videoEmbedUrl ? (
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }} className="overflow-hidden border border-slate-200 bg-slate-950">
+              <iframe
+                className="aspect-video w-full bg-slate-950"
+                src={detail.videoEmbedUrl}
+                title={item.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </motion.div>
+          ) : detail.videoUrl ? (
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }} className="overflow-hidden border border-slate-200 bg-slate-950">
               <video className="aspect-video w-full bg-slate-950 object-contain" controls playsInline preload="metadata" poster={item.image} src={detail.videoUrl} />
             </motion.div>
@@ -81,7 +92,7 @@ export default function DetailPage({ item, section, detail, relatedItems, blogIt
             </motion.article>
           )}
 
-          {detail.videoUrl ? (
+          {hasVideo ? (
             <article className="mt-8 border border-slate-200 bg-white p-6 sm:p-8">
               <div className="mb-4 text-[10px] font-bold uppercase tracking-[0.22em] text-slate-400">Mô tả video</div>
               <div className="space-y-5 text-base leading-8 text-slate-700">
@@ -104,7 +115,7 @@ export default function DetailPage({ item, section, detail, relatedItems, blogIt
               </div>
               <div>
                 <dt className="font-semibold text-slate-400">Định dạng</dt>
-                <dd className="mt-1 font-semibold text-slate-900">{detail.videoUrl ? "Video + mô tả" : isBlog ? "Bài viết" : "Nội dung đọc"}</dd>
+                <dd className="mt-1 font-semibold text-slate-900">{hasVideo ? "Video + mô tả" : isBlog ? "Bài viết" : "Nội dung đọc"}</dd>
               </div>
             </dl>
           </div>

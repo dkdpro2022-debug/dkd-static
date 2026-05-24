@@ -47,5 +47,6 @@ export interface SourceSection {
 export interface ContentDetail {
   description: string;
   videoUrl?: string;
+  videoEmbedUrl?: string;
   body?: string[];
 }

@@ -2,7 +2,7 @@ import type { ContentDetail, HomepageSection, HomepageSectionLayout } from "./ty
 import { sourceSections } from "./sectionsData";
 
 export const heroText =
-  "Điều Kỳ Diệu lưu giữ các video, bài viết và góc nhìn chân thực theo đúng các chuyên mục nguồn: câu chuyện kỳ diệu, tiếng nói chuyên gia, hành trình hồng truyền và hướng dẫn cho người mới tìm hiểu.";
+  "Trang thông tin tổng hợp về câu chuyện chân thực, trải nghiệm kỳ diệu có thật, góc nhìn của các chuyên gia và các hình ảnh hồng truyền Đại Pháp từ khắp nơi trên thế giới.";
 
 const layoutByIndex: Record<number, HomepageSectionLayout> = {
   1: "featured",

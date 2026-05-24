@@ -1,7 +1,7 @@
 import React from "react";
 import { ArrowUpRight, CirclePlay } from "lucide-react";
 import { Button } from "./ui/button";
-import { heroText, homepageSections, sourceItemCount } from "../data";
+import { heroText, homepageSections } from "../data";
 import { motion } from "motion/react";
 
 export default function Hero() {
@@ -47,20 +47,11 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
         >
-          <motion.div 
-            variants={itemVariants}
-            className="mb-5 inline-flex items-center gap-2"
-          >
-            <span className="text-xs font-bold text-slate-400 tracking-[0.25em] uppercase">
-              10 chuyên mục / {sourceItemCount} mục nguồn
-            </span>
-          </motion.div>
-
           <motion.h1 
             variants={itemVariants}
             className="font-display text-[clamp(2.35rem,3.6vw,4.5rem)] font-black leading-[1.14] tracking-normal text-[#102A43] mb-6 max-w-4xl"
           >
-            Thư viện Điều Kỳ Diệu theo đúng chuyên mục nguồn.
+            Thư viện Điều Kỳ Diệu
           </motion.h1>
 
           <motion.p 
