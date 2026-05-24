@@ -1,5 +1,5 @@
 import sectionsMarkdown from "../dieukydieu_sections.md?raw";
-import type { HomepageSection, HomepageSectionLayout } from "./types";
+import type { ContentDetail, HomepageSection, HomepageSectionLayout } from "./types";
 
 export const heroText =
   "Điều Kỳ Diệu lưu giữ các video, bài viết và góc nhìn chân thực theo đúng các chuyên mục nguồn: câu chuyện kỳ diệu, tiếng nói chuyên gia, hành trình hồng truyền và hướng dẫn cho người mới tìm hiểu.";
@@ -136,3 +136,25 @@ export const navItems = homepageSections
   .map((section) => ({ label: priorityLabels[section.id], id: section.id }));
 
 export const allNavItems = homepageSections.map((section) => ({ label: section.title, id: section.id }));
+
+export const contentDetails: Record<string, ContentDetail> = {
+  "/phap-luan-cong-tai-hue-net-dep-van-hoa-truyen-thong/": {
+    description:
+      "Một video ghi lại nét đẹp văn hóa truyền thống tại Huế qua hình ảnh học viên Pháp Luân Công, nhịp sinh hoạt ôn hòa và tinh thần Chân - Thiện - Nhẫn trong đời sống thường ngày.",
+    videoUrl:
+      "https://media.dieukydieu.tv/videos/original/Ph%C3%A1p-Lu%C3%A2n-C%C3%B4ng-t%E1%BA%A1i-Hu%E1%BA%BF-N%C3%A9t-%C4%91%E1%BA%B9p-v%C4%83n-h%C3%B3a-truy%E1%BB%81n-th%E1%BB%91ng.mp4",
+    body: [
+      "Video đặt người xem vào một không gian chậm rãi, nơi hình ảnh vùng đất cố đô và hoạt động tu luyện được trình bày như một lát cắt văn hóa.",
+      "Nội dung phù hợp với người muốn tìm hiểu Pháp Luân Công qua câu chuyện thực tế tại Việt Nam, thay vì chỉ đọc khái niệm hoặc thông tin giới thiệu.",
+      "Sau khi xem video, bạn có thể tiếp tục đọc các bài viết liên quan ở cuối trang để có thêm bối cảnh về các địa phương khác và các trải nghiệm cá nhân.",
+    ],
+  },
+};
+
+export const defaultContentDetail = (title: string, sectionTitle: string): ContentDetail => ({
+  description: `${title} thuộc chuyên mục ${sectionTitle}. Nội dung được giữ theo đường dẫn nguồn và trình bày lại trong giao diện dễ xem, dễ đọc hơn.`,
+  body: [
+    "Trang này tóm lược nội dung nguồn thành một trải nghiệm đọc rõ ràng hơn, đồng thời giữ đường dẫn gốc để người xem có thể mở bài đầy đủ khi cần.",
+    "Các nội dung liên quan ở cuối trang giúp tiếp tục khám phá cùng chủ đề mà không phải quay lại danh sách chuyên mục.",
+  ],
+});

@@ -33,3 +33,9 @@ export interface HomepageSection {
   layout: HomepageSectionLayout;
   items: HomepageItem[];
 }
+
+export interface ContentDetail {
+  description: string;
+  videoUrl?: string;
+  body?: string[];
+}
