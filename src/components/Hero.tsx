@@ -1,7 +1,7 @@
 import React from "react";
 import { ArrowUpRight, CirclePlay } from "lucide-react";
 import { Button } from "./ui/button";
-import { heroText } from "../data";
+import { heroText, homepageSections, sourceItemCount } from "../data";
 import { motion } from "motion/react";
 
 export default function Hero() {
@@ -52,17 +52,15 @@ export default function Hero() {
             className="mb-5 inline-flex items-center gap-2"
           >
             <span className="text-xs font-bold text-slate-400 tracking-[0.25em] uppercase">
-              ESTABLISHED 2022
+              10 chuyên mục / {sourceItemCount} mục nguồn
             </span>
           </motion.div>
 
           <motion.h1 
             variants={itemVariants}
-            className="font-editorial text-[clamp(2.35rem,4.65vw,4.35rem)] font-normal leading-[1.22] text-slate-950 mb-6 tracking-normal"
+            className="font-display text-[clamp(2.35rem,3.6vw,4.5rem)] font-black leading-[1.14] tracking-normal text-[#102A43] mb-6 max-w-4xl"
           >
-            Những câu chuyện <br />
-            sáng lại niềm tin <br />
-            vào điều thiện.
+            Thư viện Điều Kỳ Diệu theo đúng chuyên mục nguồn.
           </motion.h1>
 
           <motion.p 
@@ -81,7 +79,7 @@ export default function Hero() {
               size="lg" 
               className="h-12 rounded-none bg-slate-950 px-8 text-xs font-bold tracking-widest uppercase text-white hover:bg-slate-800 transition-colors duration-200 cursor-pointer shadow-none border-none"
             >
-              <a href="#watch" onClick={(e) => handleScrollTo("watch", e)}>
+              <a href={`#${homepageSections[0]?.id ?? "sections"}`} onClick={(e) => handleScrollTo(homepageSections[0]?.id ?? "sections", e)}>
                 <CirclePlay className="h-4 w-4 mr-2" />
                 XEM VIDEO TIÊU BIỂU
               </a>
@@ -92,8 +90,8 @@ export default function Hero() {
               size="lg" 
               className="h-12 rounded-none border-slate-250 bg-white px-8 text-xs font-bold tracking-widest uppercase text-slate-900 hover:bg-slate-50 transition-colors duration-200 cursor-pointer shadow-none"
             >
-              <a href="#stories" onClick={(e) => handleScrollTo("stories", e)}>
-                KHÁM PHÁ CÂU CHUYỆN
+              <a href="#sections" onClick={(e) => handleScrollTo("sections", e)}>
+                XEM TOÀN BỘ CHUYÊN MỤC
                 <ArrowUpRight className="h-4 w-4 ml-1" />
               </a>
             </Button>

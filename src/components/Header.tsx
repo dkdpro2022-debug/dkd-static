@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Menu, X, Search, Sparkles } from "lucide-react";
+import { ChevronDown, Menu, Search, Sparkles, X } from "lucide-react";
 import { Button } from "./ui/button";
-import { navItems } from "../data";
+import { allNavItems, navItems } from "../data";
 import { motion, AnimatePresence } from "motion/react";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSectionMenuOpen, setIsSectionMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -13,6 +14,7 @@ export default function Header() {
 
   const scrollToSection = (id: string) => {
     setIsMobileMenuOpen(false);
+    setIsSectionMenuOpen(false);
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
@@ -48,6 +50,40 @@ export default function Header() {
                 {item.label}
               </button>
             ))}
+            <div className="relative">
+              <button
+                onClick={() => setIsSectionMenuOpen((open) => !open)}
+                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-slate-950 relative cursor-pointer py-1 transition-colors duration-200"
+                aria-expanded={isSectionMenuOpen}
+              >
+                Chuyên mục
+                <ChevronDown className={`h-3.5 w-3.5 transition-transform ${isSectionMenuOpen ? "rotate-180" : ""}`} />
+              </button>
+              <AnimatePresence>
+                {isSectionMenuOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 8 }}
+                    transition={{ duration: 0.16 }}
+                    className="absolute right-0 top-8 w-[360px] border border-slate-200 bg-white p-3 shadow-xl"
+                  >
+                    <div className="grid gap-1">
+                      {allNavItems.map((item, index) => (
+                        <button
+                          key={item.id}
+                          onClick={() => scrollToSection(item.id)}
+                          className="grid grid-cols-[2rem_1fr] items-center gap-2 px-3 py-2 text-left text-xs font-semibold text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-950"
+                        >
+                          <span className="font-display text-[10px] font-bold text-slate-400">{String(index + 1).padStart(2, "0")}</span>
+                          <span>{item.label}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </nav>
 
           <div className="flex items-center gap-3">
@@ -101,13 +137,14 @@ export default function Header() {
                   <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-800">MENU</span>
                 </div>
                 <nav className="flex flex-col gap-4">
-                  {navItems.map((item) => (
+                  {allNavItems.map((item, index) => (
                     <button
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
-                      className="text-left text-sm font-bold uppercase tracking-wider text-slate-600 hover:text-slate-950 py-2.5 px-2 rounded-none hover:bg-slate-50 transition-all duration-200 cursor-pointer"
+                      className="grid grid-cols-[2rem_1fr] items-center gap-2 text-left text-sm font-semibold text-slate-600 hover:text-slate-950 py-2.5 px-2 rounded-none hover:bg-slate-50 transition-all duration-200 cursor-pointer"
                     >
-                      {item.label}
+                      <span className="font-display text-[10px] font-bold text-slate-400">{String(index + 1).padStart(2, "0")}</span>
+                      <span>{item.label}</span>
                     </button>
                   ))}
                 </nav>

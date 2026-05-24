@@ -1,5 +1,5 @@
 import React from "react";
-import { navItems } from "../data";
+import { allNavItems } from "../data";
 
 export default function Footer() {
   const handleScrollTo = (id: string, e: React.MouseEvent) => {
@@ -28,7 +28,7 @@ export default function Footer() {
           <div className="space-y-4 md:pl-10">
             <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Khám Phá</h4>
             <ul className="space-y-3">
-              {navItems.map((item) => (
+              {allNavItems.map((item) => (
                 <li key={item.id}>
                   <a
                     href={`#${item.id}`}

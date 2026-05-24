@@ -17,3 +17,19 @@ export interface QuoteItem {
   avatar: string;
   text: string;
 }
+
+export type HomepageSectionLayout = "featured" | "grid" | "compact";
+
+export interface HomepageItem {
+  title: string;
+  href: string;
+  image?: string;
+}
+
+export interface HomepageSection {
+  id: string;
+  title: string;
+  sourceUrl?: string;
+  layout: HomepageSectionLayout;
+  items: HomepageItem[];
+}
