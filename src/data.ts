@@ -1,5 +1,5 @@
-import sectionsMarkdown from "../dieukydieu_sections.md?raw";
 import type { ContentDetail, HomepageSection, HomepageSectionLayout } from "./types";
+import { sourceSections } from "./sectionsData";
 
 export const heroText =
   "Điều Kỳ Diệu lưu giữ các video, bài viết và góc nhìn chân thực theo đúng các chuyên mục nguồn: câu chuyện kỳ diệu, tiếng nói chuyên gia, hành trình hồng truyền và hướng dẫn cho người mới tìm hiểu.";
@@ -60,8 +60,6 @@ const knownImages: Record<string, string> = {
   "videos/nghe-si-mua-le-vi-toi-may-man-khi-tim-thay-anh-sang-chan-ly-cua-cuoc-doi/index.html": "/wp-content/uploads/2020/02/nghe-sy-mua-le-vy-150x150.jpg",
 };
 
-const stripEmojiNumber = (heading: string) => heading.replace(/^\d+\.\s+\S+\s+/, "").trim();
-
 const slugify = (value: string) =>
   value
     .normalize("NFD")
@@ -81,53 +79,16 @@ const getPathKey = (href: string) => {
   }
 };
 
-const toRelativeHref = (href: string) => {
-  try {
-    const url = new URL(href);
-    return `${url.pathname}${url.search}${url.hash}`;
-  } catch {
-    return href;
-  }
-};
-
-const decodeEntities = (value: string) =>
-  value
-    .replace(/&#124;/g, "|")
-    .replace(/&amp;/g, "&")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'");
-
-function parseSections(markdown: string): HomepageSection[] {
-  const sectionBlocks = markdown.split(/\n(?=## \d+\.)/g).filter((block) => /^## \d+\./.test(block.trim()));
-
-  return sectionBlocks.map((block) => {
-    const heading = block.match(/^##\s+(.+)$/m)?.[1] ?? "";
-    const index = Number(heading.match(/^(\d+)\./)?.[1] ?? "0");
-    const title = stripEmojiNumber(heading);
-    const rawSourceUrl = block.match(/\*.+?\[(https:\/\/dieukydieu\.tv\/[^\]]+)\]\(\1\)\*/)?.[1];
-    const sourceUrl = rawSourceUrl ? toRelativeHref(rawSourceUrl) : undefined;
-
-    const items = [...block.matchAll(/^\|\s+\d+\s+\|\s+(.+?)\s+\|\s+\[Xem chi tiết\]\((https:\/\/dieukydieu\.tv\/[^)]+)\)\s+\|$/gm)].map((match) => {
-      const href = match[2];
-      const key = getPathKey(href);
-      return {
-        title: decodeEntities(match[1].trim()),
-        href: toRelativeHref(href),
-        image: knownImages[key],
-      };
-    });
-
-    return {
-      id: slugify(title),
-      title,
-      sourceUrl,
-      layout: layoutByIndex[index] ?? "grid",
-      items,
-    };
-  });
-}
-
-export const homepageSections = parseSections(sectionsMarkdown);
+export const homepageSections: HomepageSection[] = sourceSections.map((section) => ({
+  id: slugify(section.title),
+  title: section.title,
+  sourceUrl: section.sourceUrl,
+  layout: layoutByIndex[section.index] ?? "grid",
+  items: section.items.map((item) => ({
+    ...item,
+    image: knownImages[getPathKey(item.href)],
+  })),
+}));
 
 export const sourceItemCount = homepageSections.reduce((total, section) => total + section.items.length, 0);
 

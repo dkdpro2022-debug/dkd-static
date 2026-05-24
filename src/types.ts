@@ -34,6 +34,16 @@ export interface HomepageSection {
   items: HomepageItem[];
 }
 
+export interface SourceSection {
+  index: number;
+  title: string;
+  sourceUrl?: string;
+  items: {
+    title: string;
+    href: string;
+  }[];
+}
+
 export interface ContentDetail {
   description: string;
   videoUrl?: string;
