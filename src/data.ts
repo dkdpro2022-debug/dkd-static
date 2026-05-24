@@ -121,6 +121,16 @@ export const contentDetails: Record<string, ContentDetail> = {
       "Bạn có thể xem thêm các video cùng chuyên mục để đối chiếu trải nghiệm tại nhiều vùng đất khác nhau, hoặc đọc thêm blog để có thêm bối cảnh nền.",
     ],
   },
+  "/videos/ca-si-nsnd-trung-duc-trai-nghiem-ve-phap-luan-cong/index.html": {
+    description:
+      "NSND Trung Đức chia sẻ trải nghiệm cá nhân sau khi thực hành Pháp Luân Công, nhấn mạnh những thay đổi tích cực mà ông cảm nhận được trong sức khỏe và đời sống tinh thần.",
+    videoUrl: "https://media.dieukydieu.tv/videos/original/NSND-trung-duc.mp4",
+    body: [
+      "Video tập trung vào lời kể trực tiếp của NSND Trung Đức, giúp người xem tiếp cận câu chuyện theo góc nhìn trải nghiệm cá nhân.",
+      "Nội dung phù hợp với người muốn nghe chia sẻ từ một nghệ sĩ từng thực hành Pháp Luân Công và tự đánh giá tác động của môn tu luyện trong đời sống.",
+      "Sau khi xem, bạn có thể tiếp tục khám phá các video cùng chuyên mục hoặc đọc thêm các bài viết liên quan để có thêm bối cảnh.",
+    ],
+  },
 };
 
 export const defaultContentDetail = (title: string, sectionTitle: string): ContentDetail => ({
