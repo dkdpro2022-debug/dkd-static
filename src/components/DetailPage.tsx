@@ -49,7 +49,7 @@ export default function DetailPage({ item, section, detail, relatedItems, blogIt
             <h1 className="font-display text-3xl font-black leading-tight tracking-normal text-[#102A43] sm:text-5xl">
               {item.title}
             </h1>
-            <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base">{detail.description}</p>
+            {!hasVideo ? <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base">{detail.description}</p> : null}
           </motion.div>
         </div>
       </section>
@@ -94,9 +94,8 @@ export default function DetailPage({ item, section, detail, relatedItems, blogIt
 
           {hasVideo ? (
             <article className="mt-8 border border-slate-200 bg-white p-6 sm:p-8">
-              <div className="mb-4 text-[10px] font-bold uppercase tracking-[0.22em] text-slate-400">Mô tả video</div>
               <div className="space-y-5 text-base leading-8 text-slate-700">
-                {detail.body?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                <p>{detail.description}</p>
               </div>
             </article>
           ) : null}
