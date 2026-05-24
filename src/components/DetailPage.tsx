@@ -29,6 +29,7 @@ function SmallContentLink({ item }: { item: HomepageItem }) {
 
 export default function DetailPage({ item, section, detail, relatedItems, blogItems }: DetailPageProps) {
   const isBlog = section.id === "blog";
+  const sourceHref = new URL(item.href, "https://dieukydieu.tv").href;
 
   return (
     <main className="bg-white pt-20">
@@ -72,7 +73,7 @@ export default function DetailPage({ item, section, detail, relatedItems, blogIt
                 <div className="space-y-5 text-base leading-8 text-slate-700">
                   {detail.body?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                 </div>
-                <a href={item.href} className="mt-8 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-600 hover:text-slate-950">
+                <a href={sourceHref} target="_blank" rel="noreferrer" className="mt-8 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-600 hover:text-slate-950">
                   Mở bài gốc
                   <ArrowUpRight className="h-4 w-4" />
                 </a>

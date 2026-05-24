@@ -153,27 +153,28 @@ export default function HomepageSections() {
       {homepageSections.map((section, sectionIndex) => (
         <section key={section.id} id={section.id} className="scroll-mt-24 border-b border-slate-100 bg-white py-12 sm:py-14">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
-            <div className="grid gap-5 lg:grid-cols-[18rem_1fr] lg:items-start">
-              <motion.div
-                initial={{ opacity: 0, x: -14 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.35 }}
-                className="lg:pr-6"
-              >
-                <div className="mb-3 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-slate-400">
-                  <Layers3 className="h-4 w-4" />
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.35 }}
+              className="mb-8 sm:mb-10"
+            >
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-slate-400">
+                  <Layers3 className="h-4 w-4 shrink-0" />
                   <span>Chuyên mục {String(sectionIndex + 1).padStart(2, "0")}</span>
                 </div>
-                <h2 className="font-display text-xl font-black leading-tight tracking-normal text-[#102A43] sm:text-2xl">
-                  {section.title}
-                </h2>
-              </motion.div>
-
-              <div>
-                <SectionBody section={section} />
+                <span className="hidden text-xs font-semibold text-slate-400 sm:inline">
+                  {section.items.length} mục
+                </span>
               </div>
-            </div>
+              <h2 className="max-w-4xl font-display text-3xl font-black leading-tight tracking-normal text-[#102A43] sm:text-4xl lg:text-5xl">
+                {section.title}
+              </h2>
+            </motion.div>
+
+            <SectionBody section={section} />
           </div>
         </section>
       ))}
