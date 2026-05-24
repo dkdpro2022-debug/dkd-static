@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { ChevronDown, Menu, Search, Sparkles, X } from "lucide-react";
 import { Button } from "./ui/button";
-import { allNavItems } from "../data";
+import { allNavItems, navItems } from "../data";
 import { motion, AnimatePresence } from "motion/react";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSectionMenuOpen, setIsSectionMenuOpen] = useState(false);
+  const navItemIds = new Set(navItems.map((item) => item.id));
+  const dropdownItems = allNavItems
+    .map((item, index) => ({ ...item, index }))
+    .filter((item) => !navItemIds.has(item.id));
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -45,6 +49,15 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-8 lg:flex">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-slate-950 relative cursor-pointer py-1 transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-slate-950 after:transition-all after:duration-300 hover:after:w-full"
+              >
+                {item.label}
+              </button>
+            ))}
             <div className="relative">
               <button
                 onClick={() => setIsSectionMenuOpen((open) => !open)}
@@ -64,13 +77,13 @@ export default function Header() {
                     className="absolute right-0 top-8 w-[360px] border border-slate-200 bg-white p-3 shadow-xl"
                   >
                     <div className="grid gap-1">
-                      {allNavItems.map((item, index) => (
+                      {dropdownItems.map((item) => (
                         <button
                           key={item.id}
                           onClick={() => scrollToSection(item.id)}
                           className="grid grid-cols-[2rem_1fr] items-center gap-2 px-3 py-2 text-left text-xs font-semibold text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-950"
                         >
-                          <span className="font-display text-[10px] font-bold text-slate-400">{String(index + 1).padStart(2, "0")}</span>
+                          <span className="font-display text-[10px] font-bold text-slate-400">{String(item.index + 1).padStart(2, "0")}</span>
                           <span>{item.label}</span>
                         </button>
                       ))}
