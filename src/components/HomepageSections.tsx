@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ArrowUpRight, ChevronDown, ExternalLink, Layers3, Quote } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Layers3, Quote } from "lucide-react";
 import { motion } from "motion/react";
 import { homepageSections } from "../data";
 import type { HomepageItem, HomepageSection } from "../types";
@@ -171,24 +171,6 @@ export default function HomepageSections() {
               </motion.div>
 
               <div>
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.35, delay: 0.06 }}
-                  className="mb-2 flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3 text-xs font-semibold text-slate-500"
-                >
-                  <span>{section.items.length} mục</span>
-                  {section.sourceUrl ? (
-                    <a href={section.sourceUrl} className="inline-flex items-center gap-2 text-slate-500 transition-colors hover:text-slate-950">
-                      <span>Nguồn chuyên mục</span>
-                      <ExternalLink className="h-3.5 w-3.5" />
-                    </a>
-                  ) : (
-                    <span>Nguồn trang chủ</span>
-                  )}
-                </motion.div>
-
                 <SectionBody section={section} />
               </div>
             </div>
