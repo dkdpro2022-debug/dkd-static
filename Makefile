@@ -1,16 +1,19 @@
 PROJECT_NAME ?= dkd-staging
 BRANCH ?= staging
 DIST_DIR ?= dist
+DEV_HOST ?= 0.0.0.0
+DEV_PORT ?= 3000
 NODE_BIN ?= $(HOME)/.nvm/versions/node/v22.16.0/bin
 NPM ?= $(NODE_BIN)/npm
 SFW ?= $(NODE_BIN)/sfw
 WRANGLER ?= $(NPM) exec --yes wrangler --
 
-.PHONY: help install build check-cloudflare-env create-staging-project deploy-staging preview clean
+.PHONY: help install dev build check-cloudflare-env create-staging-project deploy-staging preview clean
 
 help:
 	@echo "Targets:"
 	@echo "  make install          Install npm dependencies with npm ci"
+	@echo "  make dev              Start Vite dev server on http://$(DEV_HOST):$(DEV_PORT)"
 	@echo "  make build            Build the React app through Socket Firewall"
 	@echo "  make check-cloudflare-env"
 	@echo "                        Check required Cloudflare environment variables"
@@ -22,6 +25,8 @@ help:
 	@echo "Variables:"
 	@echo "  PROJECT_NAME=$(PROJECT_NAME)"
 	@echo "  BRANCH=$(BRANCH)"
+	@echo "  DEV_HOST=$(DEV_HOST)"
+	@echo "  DEV_PORT=$(DEV_PORT)"
 	@echo ""
 	@echo "Example:"
 	@echo "  make deploy-staging PROJECT_NAME=your-cloudflare-pages-project"
@@ -31,6 +36,9 @@ install:
 
 build:
 	$(SFW) npm run build
+
+dev:
+	$(NPM) run dev -- --host $(DEV_HOST) --port $(DEV_PORT)
 
 check-cloudflare-env:
 	@test -n "$$CLOUDFLARE_API_TOKEN" || (echo "Missing CLOUDFLARE_API_TOKEN. Example: export CLOUDFLARE_API_TOKEN=\$$(pass token/cloudflare-build-pages)" && exit 1)

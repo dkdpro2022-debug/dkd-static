@@ -155,7 +155,7 @@ export default function HomepageSections() {
   return (
     <main id="sections" className="bg-white">
       {homepageSections.map((section) => (
-        <section key={section.id} id={section.id} className="scroll-mt-24 border-b border-slate-100 bg-white py-12 sm:py-14">
+        <section key={section.id} id={section.id} className="scroll-mt-24 border-b border-slate-100 bg-white py-8 sm:py-14">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
