@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowUpRight, BookOpen, Film, Layers3 } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 import type { ContentDetail, HomepageItem, HomepageSection } from "../types";
 
@@ -28,7 +28,6 @@ function SmallContentLink({ item }: { item: HomepageItem }) {
 }
 
 export default function DetailPage({ item, section, detail, relatedItems, blogItems }: DetailPageProps) {
-  const isBlog = section.id === "blog";
   const sourceHref = new URL(item.href, "https://dieukydieu.tv").href;
   const hasVideo = Boolean(detail.videoUrl || detail.videoEmbedUrl);
 
@@ -42,10 +41,6 @@ export default function DetailPage({ item, section, detail, relatedItems, blogIt
           </a>
 
           <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }} className="max-w-5xl">
-            <div className="mb-4 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-slate-400">
-              {isBlog ? <BookOpen className="h-4 w-4" /> : <Film className="h-4 w-4" />}
-              <span>{section.title}</span>
-            </div>
             <h1 className="font-display text-3xl font-black leading-tight tracking-normal text-[#102A43] sm:text-5xl">
               {item.title}
             </h1>
@@ -79,7 +74,7 @@ export default function DetailPage({ item, section, detail, relatedItems, blogIt
               ) : null}
               <div className="p-6 sm:p-8">
                 <div className="mb-4 text-[10px] font-bold uppercase tracking-[0.22em] text-slate-400">
-                  {isBlog ? "Bài đọc" : "Tóm lược nội dung"}
+                  {section.id === "blog" ? "Bài đọc" : "Tóm lược nội dung"}
                 </div>
                 <div className="space-y-5 text-base leading-8 text-slate-700">
                   {detail.body?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
@@ -102,23 +97,6 @@ export default function DetailPage({ item, section, detail, relatedItems, blogIt
         </div>
 
         <aside className="space-y-8">
-          <div className="border border-slate-200 bg-white p-5">
-            <div className="mb-3 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-slate-400">
-              <Layers3 className="h-4 w-4" />
-              <span>Thông tin</span>
-            </div>
-            <dl className="space-y-4 text-sm">
-              <div>
-                <dt className="font-semibold text-slate-400">Chuyên mục</dt>
-                <dd className="mt-1 font-semibold text-slate-900">{section.title}</dd>
-              </div>
-              <div>
-                <dt className="font-semibold text-slate-400">Định dạng</dt>
-                <dd className="mt-1 font-semibold text-slate-900">{hasVideo ? "Video + mô tả" : isBlog ? "Bài viết" : "Nội dung đọc"}</dd>
-              </div>
-            </dl>
-          </div>
-
           <div>
             <div className="mb-2 text-[10px] font-bold uppercase tracking-[0.22em] text-slate-400">Cùng chuyên mục</div>
             {relatedItems.slice(0, 4).map((related) => (
