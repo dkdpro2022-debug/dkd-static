@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - "**"
+    tags:
+      - "stg-*"
   workflow_dispatch:
 
 permissions:
@@ -18,7 +20,7 @@ jobs:
     name: Build and deploy
     runs-on: ubuntu-latest
     environment:
-      name: cloudflare-pages
+      name: ${{ github.ref_type == 'tag' && 'staging' || 'cloudflare-pages' }}
 
     steps:
       - name: Checkout
@@ -36,9 +38,17 @@ jobs:
       - name: Build React app
         run: npm run build
 
+      - name: Select deploy target
+        run: |
+          if [ "$GITHUB_REF_TYPE" = "tag" ]; then
+            echo "DEPLOY_BRANCH=stg" >> "$GITHUB_ENV"
+          else
+            echo "DEPLOY_BRANCH=$GITHUB_REF_NAME" >> "$GITHUB_ENV"
+          fi
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=${{ vars.CLOUDFLARE_PROJECT_NAME }} --branch=${{ github.ref_name }}
+          command: pages deploy dist --project-name=${{ vars.CLOUDFLARE_PROJECT_NAME }} --branch=${{ env.DEPLOY_BRANCH }}
