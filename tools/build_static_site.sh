@@ -59,6 +59,9 @@ old_video_pattern = re.compile(r'https?://dieukydieu\.tv/wp-content/uploads/[^"\
 youtube_placeholder_pattern = re.compile(r'https?://(?:www\.)?youtube\.com/(?:embed|watch\?v=)dQw4w9WgXcQ')
 youtube_iframe_pattern = re.compile(r'<iframe src="https://www\.youtube\.com/embed/dQw4w9WgXcQ"[^>]*></iframe>')
 video_css_pattern = re.compile(r'\.dkd-youtube-demo iframe\{position:absolute;inset:0;width:100%;height:100%;border:0;\}')
+meta_tag_pattern = re.compile(r'<meta\b[^>]*>', re.I)
+meta_attr_pattern = re.compile(r'([a-zA-Z_:.-]+)=["\']([^"\']*)["\']')
+background_image_pattern = re.compile(r'background-image:\s*url\(([^)]+)\)', re.I)
 
 if inventory_csv.exists():
     with inventory_csv.open(encoding="utf-8", newline="") as handle:
@@ -132,15 +135,40 @@ for html_file in html_files:
         )
 
     iframe_urls = iter(video_urls)
+    poster = None
+    poster_candidates = []
+    for meta_match in meta_tag_pattern.finditer(updated):
+        attrs = {
+            name.lower(): value
+            for name, value in meta_attr_pattern.findall(meta_match.group(0))
+        }
+        if attrs.get("property") == "og:image" or attrs.get("name") == "twitter:image":
+            content = attrs.get("content")
+            if content:
+                poster_candidates.append(content)
+    for bg_match in background_image_pattern.finditer(updated):
+        poster_candidates.append(bg_match.group(1).strip().strip('"\''))
+
+    for poster_url in poster_candidates:
+        parsed_poster = urlparse(poster_url)
+        if parsed_poster.path.startswith("/wp-content/"):
+            poster_path = dist_dir / parsed_poster.path.lstrip("/")
+            if poster_path.exists():
+                poster = os.path.relpath(poster_path, current_dir).replace(os.sep, "/")
+                break
+        elif not parsed_poster.scheme:
+            poster = poster_url
+            break
 
     def replace_placeholder_iframe(match):
         try:
             url = next(iframe_urls)
         except StopIteration:
             url = video_urls[-1]
+        poster_attr = f' poster="{poster}"' if poster else ""
         return (
-            '<video controls preload="metadata" playsinline '
-            f'src="{url}"></video>'
+            '<video controls preload="metadata" playsinline'
+            f'{poster_attr} src="{url}"></video>'
         )
 
     updated = youtube_iframe_pattern.sub(replace_placeholder_iframe, updated)
@@ -148,6 +176,12 @@ for html_file in html_files:
         lambda _: video_urls[0],
         updated,
     )
+    if poster:
+        updated = re.sub(
+            r'(<div class="dkd-youtube-demo"><video\b(?![^>]*\bposter=)([^>]*))>',
+            rf'\1 poster="{poster}">',
+            updated,
+        )
     updated = video_css_pattern.sub(
         '.dkd-youtube-demo iframe,.dkd-youtube-demo video{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:contain;background:#000;}',
         updated,
