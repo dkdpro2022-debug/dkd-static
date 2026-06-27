@@ -24,7 +24,7 @@ export MEDIA_URL
 rm -rf "$DIST_DIR"
 mkdir -p "$DIST_DIR"
 
-cp -a "$ROOT_DIR/pages"/. "$DIST_DIR"/
+python3 "$ROOT_DIR/tools/compile_pages.py" "$DIST_DIR"
 cp -a "$ROOT_DIR/public"/. "$DIST_DIR"/
 
 if [ -d "$ROOT_DIR/assets/wp-content" ]; then
