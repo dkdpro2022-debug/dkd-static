@@ -95,3 +95,58 @@ to:
 ```text
 s3://$R2_BUCKET/videos/original/
 ```
+
+## Structure & Layout Compilation
+
+The site uses a lightweight template compiler (`tools/compile_pages.py`) to build dynamic/deduplicated layout pages into static assets for GitHub Pages. 
+
+### Directory Layout
+
+```text
+├── assets/                  # WordPress static assets (themes, plugins, uploads)
+├── public/                  # Public metadata (robots.txt, .nojekyll)
+├── src/
+│   ├── layouts/
+│   │   └── default.html     # Master site layout wrapper (headers, footers, menus)
+│   └── pages/               # Page source files (frontmatter + unique content)
+├── tools/
+│   ├── compile_pages.py     # Compiles src/pages/ -> dist/ using default.html layout
+│   └── build_static_site.sh # Main build pipeline (compiles pages, post-processes videos/redirects)
+└── dist/                    # Compiled and post-processed site (gitignored)
+```
+
+### Adding a New Page
+
+Adding a new page is a simple and repeatable process:
+
+1. Create a folder in `src/pages/` corresponding to your route path. E.g., `src/pages/my-new-page/`.
+2. Add an `index.html` file inside this folder.
+3. At the very top of `index.html`, add the frontmatter metadata header enclosed by `---`:
+   ```html
+   ---
+   title: "My New Page Title - Điều Kỳ Diệu"
+   body_class: "page-template-default page page-id-XXXX full-width bg-fill lightbox nav-dropdown-has-arrow"
+   ---
+   <!-- Page-specific head tags (Yoast SEO tags, meta description, schema JSON-LD, etc.) -->
+   <meta name="description" content="A description of my new page" />
+   ---
+   <!-- Page-specific content (everything inside <main id="main">) -->
+   <div id="content" class="page-wrapper">
+     <div class="row">
+       <div class="col large-12">
+         <h1>Welcome to my new page</h1>
+         <p>Page content goes here...</p>
+       </div>
+     </div>
+   </div>
+   ```
+4. Run the build script locally:
+   ```bash
+   bash tools/build_static_site.sh
+   ```
+5. Preview your page locally by starting a local server:
+   ```bash
+   python3 -m http.server 8084 --directory dist
+   ```
+   Open `http://localhost:8084/my-new-page/` in your browser.
+
