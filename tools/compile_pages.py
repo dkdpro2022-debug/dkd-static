@@ -2,12 +2,39 @@
 import os
 import re
 import sys
+from html import unescape
 from pathlib import Path
 
 def get_relative_path(depth):
     if depth == 0:
         return "./"
     return "../" * depth
+
+VISIBLE_BREADCRUMB_RE = re.compile(
+    r'(?P<prefix><p\b[^>]*\bid=["\']dkd-blog-breadcrum["\'][^>]*>\s*)?'
+    r'(?P<crumb><span>\s*<span>\s*<a\b[^>]*>\s*Trang chủ\s*</a>\s*»\s*'
+    r'<span>.*?<span class=["\']breadcrumb_last["\'][^>]*>.*?</span>'
+    r'(?:</span>){2,6})',
+    re.S,
+)
+
+TAG_RE = re.compile(r"<[^>]+>")
+
+def normalize_html_text(html):
+    text = unescape(TAG_RE.sub(" ", html))
+    return " ".join(text.split())
+
+def remove_duplicate_visible_breadcrumbs(content):
+    seen = set()
+
+    def replace(match):
+        crumb_text = normalize_html_text(match.group("crumb"))
+        if crumb_text in seen:
+            return ""
+        seen.add(crumb_text)
+        return match.group(0)
+
+    return VISIBLE_BREADCRUMB_RE.sub(replace, content)
 
 def main():
     if len(sys.argv) < 2:
@@ -58,7 +85,7 @@ def main():
             
         frontmatter = parts[1].strip()
         page_head = parts[2].strip()
-        main_content = parts[3].strip()
+        main_content = remove_duplicate_visible_breadcrumbs(parts[3].strip())
         
         # Parse frontmatter variables
         meta = {}
